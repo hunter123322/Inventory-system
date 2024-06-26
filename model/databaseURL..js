@@ -1,2 +1,2 @@
-const url = "mongodb+srv://drin123322:aldrin@cluster0.bao7afq.mongodb.net/";
+const url = "mongodb+srv://";
 module.exports = url;
