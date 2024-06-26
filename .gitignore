@@ -1,5 +1,5 @@
 # Ignore index.html file
-model/databaseConnection.js
+model/databaseURL.js
 
 # Logs
 logs

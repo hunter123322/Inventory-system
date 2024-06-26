@@ -9,10 +9,10 @@ const router = express.Router();
 
 router.use(express.static("view"));
 router.use(bodyParser.json());
+
 router.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Something Broke");
-  next();
 });
 
 // Home routes
@@ -35,7 +35,6 @@ router.post("/signUp", async (req, res) => {
     user.password = hashedPassword;
     await signUp(user);
     res.status(200).json({ message: "User created successfully" });
-    res.redirect("/item");
   } catch (error) {
     res.status(500).json({ error: "Error creating user" });
   }
@@ -55,11 +54,12 @@ router.get("/items/insert", (req, res) => {
     message: "Insert your item",
   });
 });
+
 router.post("/items/insert", async (req, res) => {
   try {
-    const item = { ...req.params };
+    const item = { ...req.body };
     await insertItem(item);
-    res.status(200).json({ message: "Item sent successfully!" });
+    res.status(200).json({ message: "Item inserted successfully!" });
   } catch (error) {
     res.status(500).json({ error: "Error inserting item" });
   }
@@ -76,11 +76,9 @@ router.put("/items/update", async (req, res) => {
     const { filter, update } = req.body;
 
     await updateItem(filter, update);
-    res
-      .status(200)
-      .json({ message: `The item; ${putItem.key} successfully updated!` });
+    res.status(200).json({ message: "Item updated successfully!" });
   } catch (error) {
-    res.status(500).json({ error: "Error Update item" });
+    res.status(500).json({ error: "Error Updating item" });
   }
 });
 
