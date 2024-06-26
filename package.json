@@ -1,0 +1,26 @@
+{
+  "name": "inventoring",
+  "version": "1.0.0",
+  "description": "N/A",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "hunter",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "chai": "^5.1.1",
+    "crypto": "^1.0.1",
+    "crypto-js": "^4.2.0",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "helmet": "^7.1.0",
+    "http-status-code": "^2.1.0",
+    "mongoose": "^8.4.1",
+    "sequelize": "^6.37.3",
+    "sinon": "^18.0.0"
+  }
+}
