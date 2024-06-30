@@ -1,0 +1,14 @@
+put
+http://localhost:3000/items/update
+---> {
+--->  "filter": { "barcode": "180346699" },
+--->  "update": { "$set": { "price": 29.99 } }
+--->}
+
+get
+http://localhost:3000/items?barcode=180346699
+
+delete
+http://localhost:3000/items/180346699
+
+post 

@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 //Your actual URL for mongoDB
-const url = require("./databaseURL..js");
+const url = require("./databaseURL.js");
 
 const connectToDatabase = async () => {
   mongoose.connect(url);

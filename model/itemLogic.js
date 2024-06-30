@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 const dbConnect = require("./databaseConnection");
-const { item } = require("./schema");
+const { itemSchema } = require("./schema");
 
 //Model for inserting an item into database
-const itemModel = mongoose.model("item", item);
+const itemModel = mongoose.model("item", itemSchema);
 
 /**
  * Insert an item using item schema and insert into item collection.
@@ -39,19 +39,19 @@ async function insertItem(item) {
 async function updateItem(filter, update) {
   try {
     // Set the 'updatedAt' field to the current date and time
-    update.$set.updateAt = new Date().toISOString().slice(0, 19);
-
-    // Get the 'item' model (replace with your actual model name)
-    const updatemodel = await mongoose.model("item");
+    update.$set = update.$set || {}; // Ensure $set exists
+    update.$set.updatedAt = new Date();
 
     // Connect to the database (assuming dbConnect sets up the connection)
     await dbConnect();
 
     // Update the document
-    await updatemodel.updateOne(filter, update);
+    const result = await itemModel.updateOne(filter, update);
+
+    return result; // Return the result to use in the route
   } catch (error) {
-    // throw an error if there is an error
-    throw error;
+    // Throw an error if there is an issue
+    throw new Error(`Error updating item: ${error.message}`);
   }
 }
 
@@ -76,4 +76,4 @@ async function getItems(key) {
   }
 }
 
-module.exports = { insertItem, updateItem, getItems };
+module.exports = { insertItem, updateItem, getItems, itemModel };

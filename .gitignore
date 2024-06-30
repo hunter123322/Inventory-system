@@ -1,5 +1,6 @@
 # Ignore index.html file
 model/databaseURL.js
+try.js
 
 # Logs
 logs

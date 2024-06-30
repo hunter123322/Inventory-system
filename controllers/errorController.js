@@ -1,5 +1,4 @@
 const httpStatus = require("http-status-code");
-
 /**
  * Middleware to handle cases when no resources are found.
  * @param {Object} req - Express request object.
@@ -9,11 +8,7 @@ const httpStatus = require("http-status-code");
 exports.respondNoResourcesFound = (req, res, next) => {
   // Set the HTTP status code to 404 (Not Found).
   let errorCode = httpStatus.NOT_FOUND || 404;
-
-  res.status(errorCode);
-
-  // Call the next middleware in the stack.
-  next();
+  res.status(errorCode).send({ error: "Resource not found" });
 };
 
 /**
@@ -25,11 +20,7 @@ exports.respondNoResourcesFound = (req, res, next) => {
  */
 exports.respondInternalError = (error, req, res, next) => {
   // Set the HTTP status code to 500 (Internal Server Error).
-  let errorCode = httpStatus.INTERNAL_SERVER_ERROR;
-
-  console.log(`ERROR occurred: ${error.stack}`);
-  res.status(errorCode);
-
-  // Call the next middleware in the stack.
-  next();
+  let errorCode = httpStatus.INTERNAL_SERVER_ERROR || 500;
+  console.error(`ERROR occurred: ${error.stack}`);
+  res.status(errorCode).send({ error: "Internal server error" });
 };
